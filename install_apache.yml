@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: apt update & install apache2 & htop
+    apt:
+      update_cache: yes
+      upgrade: yes
+    when: ansible_distribution == "Ubuntu" and "Debian"
+
+  - name: pacman update & install
+    pacman:
+      update_cache: yes
+      upgrade: yes
+    when: ansible_distribution == "Archlinux"
+
+  - name: apt install
+    apt:
+      name: apache2
+    when: ansible_distribution == "Ubuntu" and "Debian"
+
+  - name: pacman install
+    pacman:
+      name: apache
+    when: ansible_distribution == "Archlinux"
