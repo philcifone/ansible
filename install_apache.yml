@@ -4,24 +4,27 @@
   become: true
   tasks: 
 
-  - name: apt update & install apache2 & htop
+  - name: apt update
     apt:
       update_cache: yes
       upgrade: yes
     when: ansible_distribution == "Ubuntu" and "Debian"
 
-  - name: pacman update & install
+  - name: pacman update
     pacman:
       update_cache: yes
       upgrade: yes
     when: ansible_distribution == "Archlinux"
 
-  - name: apt install
+  - name: apt install apache2, htop
     apt:
       name: apache2
+      name: htop
     when: ansible_distribution == "Ubuntu" and "Debian"
 
-  - name: pacman install
+  - name: pacman install apache, htop, neofetch
     pacman:
       name: apache
+      name: htop
+      name: neofetch
     when: ansible_distribution == "Archlinux"
