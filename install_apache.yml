@@ -8,7 +8,7 @@
     apt:
       update_cache: yes
       upgrade: yes
-    when: ansible_distribution == "Ubuntu" and "Debian"
+    when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: pacman update
     pacman:
@@ -20,11 +20,10 @@
     apt:
       name: apache2
       name: htop
-    when: ansible_distribution == "Ubuntu" and "Debian"
+    when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: pacman install apache, htop, neofetch
     pacman:
       name: apache
       name: htop
-      name: neofetch
     when: ansible_distribution == "Archlinux"
