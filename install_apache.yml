@@ -16,14 +16,20 @@
       upgrade: yes
     when: ansible_distribution == "Archlinux"
 
-  - name: apt install apache2, htop
+  - name: apt install apache2, htop, git, neofetch
     apt:
-      name: apache2
-      name: htop
+      name:
+        - apache2
+        - htop
+        - git
+        - neofetch
     when: ansible_distribution in ["Ubuntu", "Debian"]
 
-  - name: pacman install apache, htop, neofetch
+  - name: pacman install apache, htop, git, neofetch
     pacman:
-      name: apache
-      name: htop
+      name: 
+        - apache
+        - htop
+        - git
+        - neofetch
     when: ansible_distribution == "Archlinux"
