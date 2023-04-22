@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: update & package install
+    package:
+      update_cache: yes
+      name:
+        - vim
+        - sudo
+        - git
+        - htop
+        - rsync
+        - neofetch
+      state: latest

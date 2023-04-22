@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: update & initial package uninstall ( ( ( T E S T I N G ) ) )
+    package:
+      name:
+        - vim
+        - git
+        - htop
+        - rsync
+        - neofetch
+      state: absent
+      update_cache: yes
