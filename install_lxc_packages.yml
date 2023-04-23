@@ -30,7 +30,7 @@
       system: false
       create_home: true
       home: "/home/phil"
-      generate_ssh_key: true
+      generate_ssh_key: true 
 
   - name: update & package install
     package:
@@ -44,3 +44,10 @@
         - rsync
         - neofetch
       state: latest
+
+  - name: give phil sudo privledges
+    community.general.sudoers:
+      name: phil
+      state: present
+      user: phil
+      commands: ALL
