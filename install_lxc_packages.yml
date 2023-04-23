@@ -43,7 +43,7 @@
       home: "/home/phil"
       generate_ssh_key: true
 
-  - name: update/upgrade & package install
+  - name: update & package install
     package:
       update_cache: yes
       name:
