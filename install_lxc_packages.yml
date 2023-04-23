@@ -2,14 +2,54 @@
 
 - hosts: all
   become: true
+  become_user: root
+  become_method: su
   tasks: 
 
-  - name: update & package install
+  - name: ensure group "sudo" exists
+    ansible.builtin.group:
+      name: sudo
+      state: present
+
+  - name: ensure group "wheel" exists
+    ansible.builtin.group:
+      name: wheel
+      state: present
+      
+
+        #  - name: allow "wheel" group to have passwordless sudo
+        #    lineinfile:
+        #     dest: /etc/sudoers
+        #     state: present
+        #     regexp: "^%wheel"
+        #     line:
+        #      - "%wheel ALL=(ALL) ALL"
+        #      - "%wheel ALL=(ALL) NOPASSWD: ALL"
+        #     validate: "visudo -cf %s /etc/sudoers"
+
+  - name: add user phil
+    ansible.builtin.user:
+      name: phil
+      password: "$6$1MuvRC2r9Xvlm07W$liIGi/SNsaB8xYacYGYjkaYeNTUVC5dgCktwIG75DzLc287bSRqST2SKtvBmBM56qC8HpVmPY6h/9Dtd2qZaa0"
+      groups:
+        - wheel
+        - sudo
+        - users
+      append: true
+      state: "present"
+      shell: "/bin/bash"
+      system: false
+      create_home: true
+      home: "/home/phil"
+      generate_ssh_key: true
+
+  - name: update/upgrade & package install
     package:
       update_cache: yes
       name:
         - vim
         - sudo
+        - python3
         - git
         - htop
         - rsync
