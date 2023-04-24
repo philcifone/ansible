@@ -40,7 +40,7 @@ Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
 ### lxc-start.yml
 
-This is a baseline playbook for a Debian LXC container. Creates a container with the name "test".
+This is a baseline playbook for a Debian LXC container. Creates an LXC container with the name "test", a vmid of 300, 1 CPU core, 512MB of both memory and swap, and an 8gb mount point on magellan (ZFS array).
 
 ### Container templates
 
