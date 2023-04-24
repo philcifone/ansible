@@ -25,14 +25,16 @@ All proxmox playbooks include passwords encrypted using:
 ```shell
 sudo ansible-vault encrypt_string --vault-password-file ~/.vault_key
 ```
-Enter the desired password and then press ctrl-d twice without pressing enter.
+
+This generates a password encrypted inside your ansible vault with your vault key and AES256 encryption. When creating a new password, enter the desired password after running the command and then press ctrl-d twice without pressing enter.
 
 Playbook commands are run using:
 
 ```shell
 ansible-playbook --ask-become-pass --ask-vault-pass example-playbook.yml
 ``` 
-Be sure to pass the --ask-vault-pass when using a playbook with a vault.
+
+Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
 ### lxc-start.yml
 
@@ -46,4 +48,4 @@ This is a baseline playbook for a Debian LXC container. Creates a container with
 - filebrowser.yml
 - philcifone.yml
 
-These are set to my desired specifications and distros for each container. While I have snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well.
+These are set to my desired specifications and distros for each container. While I have snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well. Would like to add additional playbooks for installing/configuring the services they each provide.
