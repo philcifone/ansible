@@ -1,9 +1,5 @@
 # Ansible
 
-Hello, I am learning Ansible.
-
-I also run a small homelab on Proxmox VE.
-
 This repository contains playbooks to initialize LXC container settings on proxmox and beyond.
 
 ## Files
