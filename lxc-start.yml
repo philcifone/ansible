@@ -18,6 +18,7 @@
       storage: 'magellan' # rootfs - can use 'local' or 'local-lvm'
       disk: '8' # size in GB
       memory: '512' # size in MB
+      swap: '512' # swap size in MB
       unprivileged: true 
       netif: '{"net0":"name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0,firewall=yes"}' # network settings
       mounts: '{"mp0":"magellan:8,mp=/mnt/magellan"}' # additional mount points

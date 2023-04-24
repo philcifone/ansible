@@ -1,0 +1,61 @@
+---
+
+- name: Create new Debian LXC container in Proxmox
+
+  hosts: 'proxmox' # defined in inventory
+  tasks:
+  - name: 'create filebrowser container'
+    proxmox:
+      vmid: '124' # specify container ID
+      api_user: 'root@pam' # proxmox user
+      api_password: "{{ proxmox_pass }}" # encrypted password variable !!!
+      api_host: 'pve' # proxmox hostname
+      password: "{{ ct_pass }}" # encrypted password variable !!!
+      hostname: 'filebrowser' # container hostname
+      node: 'pve' # name of proxmox host
+      cores: '1'
+      ostemplate: 'local:vztmpl/debian-11-standard_11.6-1_amd64.tar.zst'
+      storage: 'local-lvm' # rootfs - can use 'local' or 'local-lvm'
+      disk: '8' # size in GB
+      memory: '1024' # size in MB
+      swap: '512' # size in MB  
+      unprivileged: true 
+      netif: '{"net0":"name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0,firewall=yes"}' # network settings
+     # ip_address: 10.0.0.164
+     # mounts: '{"mp0":"magellan:512,mp=/mnt/magellan"}{"mp1":"catalyst:7500,mp=/mnt/catalyst"}' # additional mount points
+      features: 
+        - nesting=1
+      onboot: true
+      state: 'present'
+    vars:
+      proxmox_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          32346134373966326563373836633539616561636430663966653333663066366132303666313266
+          3934373234303739323333363138343733356437653164340a383664653766623663326565313635
+          38633831623630323662393839353937383738646236633738623766646332363864653835373837
+          3337643233353265310a666164393334363435646339633536316236313232376333343136333237
+          62316165376663323738653132633864616439313630633863323433333866656537
+      ct_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37366239326130656162333132616239323136356136313032333963313364356666613239666664
+          3933666232303362373239336536303037363165356131330a613038343939313162396363386431
+          31356562626432646634323261316366393266646436626138373834326136356637303639373738
+          3963623661353930330a346435396561646539363036313462326565663962316434653164323231
+          35623365373864613233316237646465396133363537313535393533336630643431
+          
+  - name: 'start container'
+    proxmox:
+      vmid: '124'
+      api_user: 'root@pam'
+      api_password: "{{ proxmox_pass2 }}"
+      api_host: 'pve'
+      state: 'started'
+    vars:
+      proxmox_pass2: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          32346134373966326563373836633539616561636430663966653333663066366132303666313266
+          3934373234303739323333363138343733356437653164340a383664653766623663326565313635
+          38633831623630323662393839353937383738646236633738623766646332363864653835373837
+          3337643233353265310a666164393334363435646339633536316236313232376333343136333237
+          62316165376663323738653132633864616439313630633863323433333866656537
+

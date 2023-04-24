@@ -1,12 +1,27 @@
-[web_servers]
+[test-web_servers]
 10.0.0.170
 
-[db_servers]
+[test-db_servers]
 10.0.0.165
 
-[file_servers]
+[test-file_servers]
 10.0.0.10
 10.0.0.87
 
 [proxmox]
 10.0.0.179
+
+[photoprism]
+10.0.0.189
+
+[wireguard]
+10.0.0.151
+
+[plex]
+10.0.0.128
+
+[filebrowser]
+10.0.0.164
+
+[philcifone.com]
+10.0.0.144
