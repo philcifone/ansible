@@ -1,10 +1,12 @@
-# ansible
+# Ansible
 
 Hello, I am learning Ansible.
 
 I also run a small homelab on Proxmox VE.
 
 This repository contains playbooks to initialize LXC container settings on proxmox and beyond.
+
+## Files
 
 ### inventory 
 
@@ -40,7 +42,7 @@ Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
 This is a baseline playbook for a Debian LXC container. Creates a container with the name "test".
 
-### container templates
+### Container templates
 
 - photoprism.yml
 - wireguard.yml
