@@ -6,11 +6,11 @@ This repository contains playbooks to initialize LXC container settings on proxm
 
 ### inventory 
 
-This file contains a list of local IP addresses for LXC containers.
+This file contains a list and groups of local IP addresses for LXC containers.
 
 ### ansible.cfg
 
-Denotes ssh key to use for ansible.
+Denotes ssh key from controller to use for Ansible.
 
 ### user-pkgs.yml
 
@@ -36,7 +36,7 @@ Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
 ### lxc-start.yml
 
-This is a baseline playbook for a Debian LXC container. Creates an LXC container with the name "test", a vmid of 300, 1 CPU core, 512MB of both memory and swap, and an 8gb mount point on magellan (ZFS array).
+This is a baseline playbook for a Debian LXC container. It creates an LXC container with the name and number "test" and 300, 1 CPU core, 512MB of both memory and swap, and an 8gb mount point on an external array (in my case a ZFS array named magellan).
 
 ### Container templates
 
@@ -46,4 +46,6 @@ This is a baseline playbook for a Debian LXC container. Creates an LXC container
 - filebrowser.yml
 - philcifone.yml
 
-These are set to my desired specifications and distros for each container. While I have snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well. Would like to add additional playbooks for installing/configuring the services they each provide.
+These are set to my desired specifications and distros for each container. While I have backup snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well. Would like to add additional playbooks for installing/configuring the services they each provide in the future as I continue to learn.
+
+Thank you for checking out my repository. 
