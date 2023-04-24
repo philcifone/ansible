@@ -18,6 +18,10 @@ Denotes ssh key from controller to use for Ansible.
 
 This is a baseline playbook to ensure user "phil" was created correctly. It also installs initial packages such as git, vim, sudo, etc.
 
+#### remove-pkgs.yml
+
+This removes above packages aside from sudo. Made for testing.
+
 ### Proxmox playbooks
 
 All proxmox playbooks include passwords encrypted using:
