@@ -26,7 +26,7 @@ All proxmox playbooks include passwords encrypted using:
 sudo ansible-vault encrypt_string --vault-password-file ~/.vault_key
 ```
 
-This generates a password encrypted inside your ansible vault with your vault key and AES256 encryption. When creating a new password, enter the desired password after running the command and then press ctrl-d twice without pressing enter.
+This generates an encrypted password with your vault key using AES256 encryption. When creating a new password, enter the desired password after running the command and then press ctrl-d twice without pressing enter to exit and receive your encryption key.
 
 Playbook commands are run using:
 
