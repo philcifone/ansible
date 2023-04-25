@@ -1,0 +1,23 @@
+---
+
+- hosts: pve
+  become: true
+  become_user: root
+  become_method: su
+  tasks: 
+
+  - name: update cache for all LXC containers
+    package:
+      update_cache: yes
+     
+  - name: upgrade containers for Ubuntu and Debian Containers
+    apt:
+      upgrade: dist
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+  - name: upgrade containers for Arch containers
+    pacman:
+      upgrade: yes
+    when: ansible_distribution == "Archlinux"
+
+
