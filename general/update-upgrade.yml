@@ -12,7 +12,7 @@
      
   - name: upgrade containers for Ubuntu and Debian Containers
     apt:
-      upgrade: dist
+      upgrade: yes
     when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: upgrade containers for Arch containers
