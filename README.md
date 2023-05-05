@@ -24,7 +24,7 @@ This removes above packages aside from sudo. Made for testing.
 
 #### update-upgrade.yml
 
-This updates && dist-upgrades Arch, Debian, and Ubuntu containers in my pve node on Proxmox.
+This updates && upgrades Arch, Debian, and Ubuntu containers in my pve node on Proxmox.
 
 ### Proxmox playbooks
 
