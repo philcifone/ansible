@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: active
   become: true
   become_user: root
   become_method: su
