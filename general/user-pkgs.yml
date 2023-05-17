@@ -1,6 +1,6 @@
 ---
 
-- hosts: test
+- hosts: 
   become: true
   become_user: root
   become_method: su
@@ -35,6 +35,7 @@
   - name: update & package install
     package:
       update_cache: yes
+      upgrade: yes
       name:
         - vim
         - sudo

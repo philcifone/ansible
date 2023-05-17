@@ -14,7 +14,7 @@
       hostname: 'photoprism' # container hostname
       node: 'pve' # name of proxmox host
       cores: '2'
-      ostemplate: 'local:vztmpl/debian-11-standard_11.6-1_amd64.tar.zst'
+      ostemplate: 'local:vztmpl/archlinux-base_20221111-1_amd64.tar.zst'
       storage: 'local-lvm' # rootfs - can use 'local' or 'local-lvm'
       disk: '8' # size in GB
       memory: '2048' # size in MB
@@ -22,7 +22,7 @@
       unprivileged: true 
       netif: '{"net0":"name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0,firewall=yes"}' # network settings
      # ip_address: 10.0.0.189
-     # mounts: '{"mp0":"catalyst:1000,mp=/mnt/catalyst"}' # additional mount points
+      mounts: '{"mp0":"catalyst:16,mp=/mnt/catalyst"}' # additional mount points
       features: 
         - nesting=1
       onboot: true
