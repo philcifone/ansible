@@ -1,0 +1,29 @@
+---
+
+- hosts:  # insert hostname 
+  become: true
+  become_user: root
+  become_method: su
+  tasks: 
+
+  - name: update & package install
+    package:
+      update_cache: yes
+      upgrade: yes
+      name:
+        - vim
+        - sudo
+        - python3
+        - git
+        - htop
+        - rsync
+        - neofetch
+        - curl
+        - wget
+        - unzip
+        - zip
+        - tar
+        - xz
+        - python3-pip
+      state: latest
+

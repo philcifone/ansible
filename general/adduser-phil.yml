@@ -1,0 +1,128 @@
+---
+- name: Configure new user, SSH access, and install packages
+  hosts: homepage  # Replace "your_host" with the appropriate target host or group
+
+  tasks:
+    - name: Create a new user
+      become: true
+      ansible.builtin.user:
+        name: phil
+        state: present
+        shell: /bin/bash
+
+    - name: Set password for the new user
+      become: true
+      ansible.builtin.user:
+        name: phil
+        password: "{{ 'changeme' | password_hash('sha512') }}"
+
+    - name: Create the wheel group
+      become: true
+      ansible.builtin.group:
+        name: wheel
+        state: present
+
+    - name: Add the new user to the sudo and wheel groups
+      become: true
+      ansible.builtin.user:
+        name: phil
+        groups: sudo,wheel
+        append: yes
+
+    - name: Create the .ssh directory if it doesn't exist
+      become: true
+      ansible.builtin.file:
+        path: /home/phil/.ssh
+        state: directory
+        mode: '0700'
+        owner: phil
+        group: wheel
+
+    - name: Copy SSH key for passwordless login
+      become: true
+      ansible.builtin.copy:
+        content: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        dest: "/home/phil/.ssh/authorized_keys"
+        owner: phil
+        group: phil
+        mode: '0600'
+
+    - name: Disable root SSH login
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PermitRootLogin'
+        line: 'PermitRootLogin no'
+        state: present
+      notify:
+        - Restart SSH service
+
+    - name: Update package database (Arch Linux)
+      when: ansible_distribution == 'Archlinux'
+      become: true
+      ansible.builtin.pacman:
+        update_cache: yes
+
+    - name: Initialize pacman keyring (Arch Linux)
+      when: ansible_distribution == 'Archlinux'
+      become: true
+      ansible.builtin.shell: pacman-key --init
+
+    - name: Populate pacman keyring (Arch Linux)
+      when: ansible_distribution == 'Archlinux'
+      become: true
+      ansible.builtin.shell: pacman-key --populate
+
+    - name: Refresh pacman keys (Arch Linux)
+      when: ansible_distribution == 'Archlinux'
+      become: true
+      ansible.builtin.shell: pacman-key --refresh-keys
+
+    - name: Update apt cache and upgrade packages (Debian, Ubuntu)
+      when: ansible_pkg_mgr == 'apt'
+      become: true
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Update dnf cache (Rocky Linux)
+      when: ansible_pkg_mgr == 'dnf'
+      become: true
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+
+    - name: Grant sudo privileges to the wheel group (Debian, Ubuntu)
+      when: ansible_pkg_mgr == 'apt'
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        regexp: '^%wheel\s+ALL='
+        line: '%wheel ALL=(ALL) ALL'
+        state: present
+
+    - name: Grant sudo privileges to the wheel group (Rocky Linux)
+      when: ansible_pkg_mgr == 'dnf'
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/wheel
+        create: yes
+        line: '%wheel ALL=(ALL) ALL'
+        state: present
+
+    - name: Grant sudo privileges to the wheel group (Arch Linux)
+      when: ansible_distribution == 'Archlinux'
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        regexp: '^%wheel\s+ALL='
+        line: '%wheel ALL=(ALL) ALL'
+        state: present
+
+  handlers:
+    - name: Restart SSH service
+      become: true
+      ansible.builtin.service:
+        name: ssh
+        state: restarted
+
