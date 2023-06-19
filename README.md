@@ -2,6 +2,10 @@
 
 This repository contains playbooks to initialize LXC container settings on proxmox and beyond.
 
+I have since made interactive scripts (see below) that offers an interactive way to setup containers
+with default parameters as desired. They are used first, and then Ansible playbooks are used to 
+add user phil and install packages. 
+
 ## Files
 
 #### inventory 
@@ -66,7 +70,7 @@ These are set to my desired specifications and distros for each container. While
 
 ### Proxmox Scripts
 
-#### lxc-start_arch.yml
-#### lxc-start_debian.yml
+#### lxc-startup_arch.yml
+#### lxc-startup_debian.yml
 
 Thank you for checking out this repository. 
