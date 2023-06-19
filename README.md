@@ -34,6 +34,17 @@ This removes above packages aside from sudo. Made for testing.
 
 This updates && upgrades Arch, Debian, and Ubuntu containers in my pve node on Proxmox.
 
+### Proxmox Scripts
+
+#### lxc-startup_arch.yml
+
+This creates a turn key arch LXC container in proxmox and installs python for use with Ansible.
+It refreshes keys and enables and starts sshd. 
+
+#### lxc-startup_debian.yml
+
+This creates a turnkey Debian LXC container in proxmox and installs python for use with Ansible.
+
 ### Proxmox playbooks
 
 ## UPDATE: these proxmox playbooks no longer work due to TFA I have setup. Trying to find a fix.
@@ -67,10 +78,5 @@ This is a baseline playbook for a Debian LXC container. It creates an LXC contai
 - philcifone.yml
 
 These are set to my desired specifications and distros for each container. While I have backup snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well. Would like to add additional playbooks for installing/configuring the services they each provide in the future as I continue to learn.
-
-### Proxmox Scripts
-
-#### lxc-startup_arch.yml
-#### lxc-startup_debian.yml
 
 Thank you for checking out this repository. 
