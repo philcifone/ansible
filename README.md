@@ -64,4 +64,9 @@ This is a baseline playbook for a Debian LXC container. It creates an LXC contai
 
 These are set to my desired specifications and distros for each container. While I have backup snapshots of all of these I figured it wouldn't hurt to create playbooks for them as well. Would like to add additional playbooks for installing/configuring the services they each provide in the future as I continue to learn.
 
+### Proxmox Scripts
+
+#### lxc-start_arch.yml
+#### lxc-start_debian.yml
+
 Thank you for checking out this repository. 
