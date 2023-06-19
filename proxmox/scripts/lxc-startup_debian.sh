@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# arch container startup in proxmox
+# Debian container startup in proxmox
 #
 
 # User input
@@ -12,29 +12,35 @@ read -p "Enter the storage location (local-lvm, catalyst, magellan): " STORAGE
 read -p "Enter the hostname for the container: " HOSTNAME
 #read -p "Enter the password for the container, please change this later: " PASSWORD
 
-# Create Arch container
-pct create $VMID local:vztmpl/debian-11-standard_11.7-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --hostname $HOSTNAME #--password $PASSWORD
+# Create Debian container
+pct create $VMID local:vztmpl/debian-11-standard_11.7-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --ostype archlinux --features nesting=1 --start 1 --onboot 1 --unprivileged 1 --hostname $HOSTNAME #--password $PASSWORD
 
 # Start the container
-pct start $VMID
+#pct start $VMID
 
 sleep 15
 
-# enter the container
-#pct enter $VMID
-
-# create root password
+# set root passwd
 pct exec $VMID -- passwd
 
-# update container
-pct exec $VMID -- apt update && apt upgrade
+# arch keyring stuff
+pct exec $VMID -- pacman-key --init
+pct exec $VMID -- pacman-key --populate
+# below not needed currently
+#pct exec $VMID -- pacman-key --refresh-keys
 
-# ip address output for ansible
+# install python and rsync
+pct exec $VMID -- pacman -Syu python3 rsync
+
+# make .ssh directory
+#pct exec $VMID -- mkdir /root/.ssh
+
+# make authorized keys file
+pct exec $VMID -- touch /root/.ssh/authorized_keys
+
+# enable and start sshd service
+pct exec $VMID -- systemctl enable sshd
+pct exec $VMID -- systemctl start sshd
+
+# ip address output 
 pct exec $VMID -- ip a
-
-# User input for password
-#read -s -p "Enter the password for the 'root' user: " ROOT_PASSWORD
-
-# Set root password inside the container
-#pct exec $VMID -- chroot / -- sh -c "echo 'root:$ROOT_PASSWORD' | chpasswd"
-
