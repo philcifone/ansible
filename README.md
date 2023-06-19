@@ -14,9 +14,13 @@ Denotes ssh key from controller to use for Ansible.
 
 ## General playbooks
 
-#### user-pkgs.yml
+#### initial-pkgs.yml
 
-This is a baseline playbook to ensure user "phil" was created correctly. It also installs initial packages such as git, vim, sudo, etc.
+This installs initial packages.
+
+#### adduser-phil.yml
+
+This is a baseline playbook to ensure user "phil" was created correctly and given sudo privledges. It also copies SSH keys to authorized keys file.
 
 #### remove-pkgs.yml
 
@@ -27,6 +31,8 @@ This removes above packages aside from sudo. Made for testing.
 This updates && upgrades Arch, Debian, and Ubuntu containers in my pve node on Proxmox.
 
 ### Proxmox playbooks
+
+## UPDATE: these proxmox playbooks no longer work due to TFA I have setup. Trying to find a fix.
 
 All proxmox playbooks include passwords encrypted using:
 
