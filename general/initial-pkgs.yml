@@ -1,15 +1,33 @@
 ---
 
-- hosts:  # insert hostname 
-  become: true
+- hosts: debiantest # insert hostname 
+  become: false
   become_user: root
   become_method: su
   tasks: 
 
-  - name: update & package install
+    #  - name: Initialize pacman keyring (Arch Linux)
+    #    when: ansible_distribution == 'Archlinux'
+    #    become: true
+    #    ansible.builtin.shell: pacman-key --init
+
+    #  - name: Populate pacman keyring (Arch Linux)
+    #    when: ansible_distribution == 'Archlinux'
+    #    become: true
+    #    ansible.builtin.shell: pacman-key --populate
+
+    #  - name: Refresh pacman keys (Arch Linux)
+    #    when: ansible_distribution == 'Archlinux'
+    #    become: true
+    #    ansible.builtin.shell: pacman-key --refresh-keys
+
+  - name: update & upgrade
     package:
       update_cache: yes
       upgrade: yes
+
+  - name: update & package install
+    package:
       name:
         - vim
         - sudo
@@ -23,7 +41,5 @@
         - unzip
         - zip
         - tar
-        - xz
         - python3-pip
       state: latest
-

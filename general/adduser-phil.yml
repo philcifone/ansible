@@ -1,10 +1,10 @@
 ---
-- name: Configure new user, SSH access, and install packages
-  hosts: homepage  # Replace "your_host" with the appropriate target host or group
+- name: Configure new user & SSH access
+  hosts: debiantest  # Replace "your_host" with the appropriate target host or group
 
   tasks:
-    - name: Create a new user
-      become: true
+    - name: Create user phil
+      become: false
       ansible.builtin.user:
         name: phil
         state: present
@@ -52,7 +52,7 @@
       ansible.builtin.lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PermitRootLogin'
-        line: 'PermitRootLogin no'
+        line: 'PermitRootLogin prohibit-password'
         state: present
       notify:
         - Restart SSH service
@@ -62,21 +62,7 @@
       become: true
       ansible.builtin.pacman:
         update_cache: yes
-
-    - name: Initialize pacman keyring (Arch Linux)
-      when: ansible_distribution == 'Archlinux'
-      become: true
-      ansible.builtin.shell: pacman-key --init
-
-    - name: Populate pacman keyring (Arch Linux)
-      when: ansible_distribution == 'Archlinux'
-      become: true
-      ansible.builtin.shell: pacman-key --populate
-
-    - name: Refresh pacman keys (Arch Linux)
-      when: ansible_distribution == 'Archlinux'
-      become: true
-      ansible.builtin.shell: pacman-key --refresh-keys
+        upgrade: yes
 
     - name: Update apt cache and upgrade packages (Debian, Ubuntu)
       when: ansible_pkg_mgr == 'apt'
