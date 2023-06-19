@@ -1,6 +1,6 @@
 ---
 
-- hosts: archtest # insert hostname 
+- hosts: sonarr # insert hostname 
   become: false
   become_user: root
   become_method: su
