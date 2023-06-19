@@ -36,12 +36,12 @@ This updates && upgrades Arch, Debian, and Ubuntu containers in my pve node on P
 
 ### Proxmox Scripts
 
-#### lxc-startup_arch.yml
+#### lxc-startup_arch.sh
 
 This creates a turn key arch LXC container in proxmox and installs python for use with Ansible.
 It refreshes keys and enables and starts sshd. 
 
-#### lxc-startup_debian.yml
+#### lxc-startup_debian.sh
 
 This creates a turnkey Debian LXC container in proxmox and installs python for use with Ansible.
 
