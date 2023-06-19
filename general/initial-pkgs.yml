@@ -1,6 +1,6 @@
 ---
 
-- hosts: debiantest # insert hostname 
+- hosts: archtest # insert hostname 
   become: false
   become_user: root
   become_method: su
@@ -41,5 +41,4 @@
         - unzip
         - zip
         - tar
-        - python3-pip
       state: latest

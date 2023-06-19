@@ -1,6 +1,6 @@
 ---
 - name: Configure new user & SSH access
-  hosts: debiantest  # Replace "your_host" with the appropriate target host or group
+  hosts: archtest  # Replace "your_host" with the appropriate target host or group
 
   tasks:
     - name: Create user phil
@@ -20,6 +20,12 @@
       become: true
       ansible.builtin.group:
         name: wheel
+        state: present
+
+    - name: Create the sudo group
+      become: true
+      ansible.builtin.group:
+        name: sudo
         state: present
 
     - name: Add the new user to the sudo and wheel groups
@@ -109,6 +115,6 @@
     - name: Restart SSH service
       become: true
       ansible.builtin.service:
-        name: ssh
+        name: sshd
         state: restarted
 
