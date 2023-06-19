@@ -6,7 +6,7 @@
   tasks:
   - name: 'create container'
     proxmox:
-#      vmid: '300' # specify container ID
+      vmid: '300' # specify container ID
       api_user: 'root@pam' # proxmox user
       api_password: "{{ proxmox_pass }}" # encrypted password variable !!!
       api_host: 'pve' # proxmox hostname
@@ -44,7 +44,7 @@
           
   - name: 'start container'
     proxmox:
-#      vmid: '300' # containter ID to start
+      vmid: '300' # containter ID to start
       api_user: 'root@pam' # proxmox user
       api_password: "{{ proxmox_pass2 }}" # encrypted password variable !!!
       api_host: 'pve' # proxmox hostname
