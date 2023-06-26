@@ -60,7 +60,7 @@ This generates an encrypted password with your vault key using AES256 encryption
 Playbook commands are run using:
 
 ```shell
-ansible-playbook --ask-become-pass --ask-vault-pass example-playbook.yml
+sudo ansible-playbook --ask-become-pass example-playbook.yml
 ``` 
 
 Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
