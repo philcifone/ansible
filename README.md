@@ -24,6 +24,8 @@ Playbook commands are run using:
 [sudo] ansible-playbook --ask-become-pass pathto/example-playbook.yml
 ``` 
 
+Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
+
 ### IMPORTANT
 
 Before running the two below playbooks you need to copy the PUBLIC ssh key (.pub) from the root user to the ansible server and use sudo when executing the playbook.
@@ -66,8 +68,6 @@ sudo ansible-vault encrypt_string --vault-password-file ~/.vault_key
 ```
 
 This generates an encrypted password with your vault key using AES256 encryption. When creating a new password, enter the desired password after running the command and then press ctrl-d twice without pressing enter to exit and receive your encryption key.
-
-Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
 #### lxc-start.yml
 
