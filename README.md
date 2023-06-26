@@ -18,13 +18,23 @@ Denotes ssh key from controller to use for Ansible.
 
 ## General playbooks
 
+Playbook commands are run using:
+
+```shell
+[sudo] ansible-playbook --ask-become-pass pathto/example-playbook.yml
+``` 
+
+### IMPORTANT
+
+Before running the two below playbooks you need to copy the PUBLIC ssh key (.pub) from the root user to the ansible server and use sudo when executing the playbook.
+
 #### initial-pkgs.yml
 
 This installs initial packages.
 
 #### adduser-phil.yml
 
-This is a baseline playbook to ensure user "phil" was created correctly and given sudo privledges. It also copies SSH keys to authorized keys file.
+This is a baseline playbook to ensure user "phil" was created correctly and given sudo privledges. It also copies SSH keys to authorized keys file. 
 
 #### remove-pkgs.yml
 
@@ -56,12 +66,6 @@ sudo ansible-vault encrypt_string --vault-password-file ~/.vault_key
 ```
 
 This generates an encrypted password with your vault key using AES256 encryption. When creating a new password, enter the desired password after running the command and then press ctrl-d twice without pressing enter to exit and receive your encryption key.
-
-Playbook commands are run using:
-
-```shell
-sudo ansible-playbook --ask-become-pass example-playbook.yml
-``` 
 
 Be sure to pass the --ask-vault-pass option when using a playbook with a vault.
 
