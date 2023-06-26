@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# debian container startup in proxmox
+# ubuntu container startup in proxmox
 #
 
 # User input
@@ -12,8 +12,8 @@ read -p "Enter the storage location (local-lvm, catalyst, magellan): " STORAGE
 read -p "Enter the hostname for the container: " HOSTNAME
 #read -p "Enter the password for the container, please change this later: " PASSWORD
 
-# Create debian container
-pct create $VMID local:vztmpl/debian-11-standard_11.7-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --hostname $HOSTNAME #--password $PASSWORD
+# Create ubuntu container
+pct create $VMID local:vztmpl/ubuntu-23.04-standard_23.04-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --hostname $HOSTNAME #--password $PASSWORD
 
 # Start the container
 pct start $VMID
@@ -40,4 +40,3 @@ pct exec $VMID -- ip a
 
 # Set root password inside the container
 #pct exec $VMID -- chroot / -- sh -c "echo 'root:$ROOT_PASSWORD' | chpasswd"
-

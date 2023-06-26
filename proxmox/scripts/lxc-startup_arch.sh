@@ -33,7 +33,7 @@ pct exec $VMID -- pacman-key --populate
 pct exec $VMID -- pacman -Syu python3 rsync
 
 # make .ssh directory
-#pct exec $VMID -- mkdir /root/.ssh
+pct exec $VMID -- mkdir /root/.ssh
 
 # make authorized keys file
 pct exec $VMID -- touch /root/.ssh/authorized_keys
