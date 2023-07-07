@@ -1,6 +1,6 @@
 ---
 - name: Configure new user & SSH access
-  hosts: photoprism2  # Replace "your_host" with the appropriate target host or group
+  hosts: homepage  # Replace "your_host" with the appropriate target host or group
 
   tasks:
     - name: Create user phil
@@ -75,7 +75,7 @@
       become: true
       ansible.builtin.apt:
         update_cache: yes
-        upgrade: dist
+        upgrade: yes
 
     - name: Update dnf cache (Rocky Linux)
       when: ansible_pkg_mgr == 'dnf'
