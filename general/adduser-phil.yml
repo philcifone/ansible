@@ -1,6 +1,6 @@
 ---
 - name: Configure new user & SSH access
-  hosts: homepage  # Replace "your_host" with the appropriate target host or group
+  hosts: uptimekuma  # Replace "your_host" with the appropriate target host or group
 
   tasks:
     - name: Create user phil

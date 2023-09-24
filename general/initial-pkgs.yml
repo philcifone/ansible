@@ -1,9 +1,9 @@
 ---
 
-- hosts: photoprism2 # insert hostname 
-  become: true
-  become_user: root
-  become_method: su
+- hosts: audiobookshelf # insert hostname 
+  #become: true
+  #become_user: root
+  #become_method: su
   tasks: 
 
     #  - name: Initialize pacman keyring (Arch Linux)
