@@ -13,7 +13,21 @@ read -p "Enter the hostname for the container: " HOSTNAME
 #read -p "Enter the password for the container, please change this later: " PASSWORD
 
 # Create Arch container
-pct create $VMID local:vztmpl/archlinux-base_20230608-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --ostype archlinux --features nesting=1 --start 1 --onboot 1 --unprivileged 1 --hostname $HOSTNAME #--password $PASSWORD
+# pct create $VMID local:vztmpl/archlinux-base_20230608-1_amd64.tar.zst --cores $CORES --memory $MEMORY --swap $SWAP --storage $STORAGE --net0 name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0 --ostype archlinux --features nesting=1 --start 1 --onboot 1 --unprivileged 1 --hostname $HOSTNAME #--password $PASSWORD
+
+pct create $VMID \
+  local:vztmpl/archlinux-base_20230608-1_amd64.tar.zst \
+  --cores $CORES \
+  --memory $MEMORY \
+  --swap $SWAP \
+  --storage $STORAGE \
+  --net0 "name=eth0,ip=dhcp,ip6=dhcp,bridge=vmbr0" \
+  --ostype archlinux \
+  --features "nesting=1" \
+  --start 1 \
+  --onboot 1 \
+  --unprivileged 1 \
+  --hostname $HOSTNAME
 
 # Start the container
 #pct start $VMID
