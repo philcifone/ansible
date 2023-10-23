@@ -1,6 +1,6 @@
 ---
 
-- hosts: audiobookshelf # insert hostname 
+- hosts: gamehenge2 # insert hostname 
   #become: true
   #become_user: root
   #become_method: su
@@ -41,4 +41,5 @@
         - unzip
         - zip
         - tar
+        - npm
       state: latest
