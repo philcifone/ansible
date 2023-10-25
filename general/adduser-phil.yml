@@ -63,6 +63,15 @@
       notify:
         - Restart SSH service
 
+    - name: Copy .vimrc file for vim settings
+      become: true
+      ansible.builtin.copy:
+        content: "{{ lookup('file', '/home/phil/.vimrc') }}"
+        dest: "/home/phil/"
+        owner: phil
+        group: phil
+        mode: '0600'
+
     - name: Update package database (Arch Linux)
       when: ansible_distribution == 'Archlinux'
       become: true
